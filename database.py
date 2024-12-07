@@ -6,10 +6,10 @@ from mysql.connector import Error
 def create_connection():
     try:
         connection = mysql.connector.connect(
-            host=DB_HOST,          # e.g., "localhost" or your cloud DB host
-            user=DB_USER,      # e.g., "root"
-            password=DB_PW,  # e.g., "password123"
-            database=DB_NAME   # e.g., "test_db"
+            host=st.secrets["database"]["DB_HOST"],
+            user=st.secrets["database"]["DB_USER"],
+            password=st.secrets["database"]["DB_PW"],
+            database=st.secrets["database"]["DB_NAME"]
         )
         # if connection.is_connected():
         #    st.success("Connected to the MySQL database!")
