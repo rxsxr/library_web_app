@@ -11,8 +11,6 @@ def create_connection():
             password=st.secrets["database"]["DB_PW"],
             database=st.secrets["database"]["DB_NAME"]
         )
-        # if connection.is_connected():
-        #    st.success("Connected to the MySQL database!")
         return connection
     except Error as e:
         st.error(f"Error connecting to MySQL: {e}")
