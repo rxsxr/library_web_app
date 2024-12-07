@@ -1,5 +1,5 @@
 import streamlit as st
-from database import *
+from database import authenticate_user, get_books_by_title, get_books_by_author, get_books_by_author_first, get_books_by_author_last, fetch_books
 
 # initialize the page state in session_state if it doesn't exist
 if "page" not in st.session_state: 
@@ -93,7 +93,7 @@ elif st.session_state.page == "Browse the Catalogue":
         left, right = st.columns([0.8, 0.2])
 
         with right: 
-            home_button1 = st.button("Home")
+            home_button1 = st.button("Home", key="home1")
             if home_button1:
                 go_to_home()
 
@@ -119,8 +119,8 @@ elif st.session_state.page == "Search in Catalogue":
     with st.container():
         left, right = st.columns([0.8, 0.2])
         with right: 
-            home_button2 = st.button("Home")
-            go_back_button1 = st.button("Prev Page")
+            home_button2 = st.button("Home", key="home2")
+            go_back_button1 = st.button("Prev Page", key="back1")
             if go_back_button1:
                 go_to_browse_page()
             if home_button2:
@@ -205,11 +205,11 @@ elif st.session_state.page == "Filter the Catalogue":
     with st.container():
         left, right = st.columns([0.8, 0.2])
         with right: 
-            home_button2 = st.button("Home")
-            go_back_button1 = st.button("Prev Page")
-            if go_back_button1:
+            home_button3 = st.button("Home", key="home3")
+            go_back_button2 = st.button("Prev Page", key="back2")
+            if go_back_button2:
                 go_to_browse_page()
-            if home_button2:
+            if home_button3:
                 go_to_home()
         with left: 
             st.title("Browse the Catalogue")
@@ -264,8 +264,8 @@ elif st.session_state.page == "Sign In":
     with st.container():
         left, right = st.columns([0.8, 0.2])
         with right: 
-            home_button2 = st.button("Home")
-            if home_button2:
+            home_button4 = st.button("Home", key="home4")
+            if home_button4:
                 go_to_home()
         with left: 
             st.title("Sign In")
