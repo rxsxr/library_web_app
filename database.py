@@ -45,12 +45,20 @@ def authenticate_user(login_id, pin):
 # execute search query based on parameters
 def search_books(query, params=None):
     connection = create_connection()
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute(query, params)
-    results = cursor.fetchall()
-    cursor.close()
-    connection.close()
-    return results 
+    if connection is None:
+        raise ConnectionError("Failed to connect to the database. Check your connection settings.")
+    try:
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query, params)
+        results = cursor.fetchall()
+        cursor.close()
+        return results
+    except mysql.connector.Error as e:
+        print(f"Error executing query: {e}")
+        return []
+    finally:
+        if connection:
+            connection.close()
 
 # fetch all books based on parameter
 def get_books_by_title(title):
